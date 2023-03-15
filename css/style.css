@@ -1,5 +1,8 @@
+* {
+  background-color: #302f2f;
+}
 h1 {
-  color: rgb(237, 104, 33);
+  color: #fc7300;
   font-size: 55px;
 }
 #duck-logo {
@@ -12,28 +15,8 @@ h1 {
 }
 .flex-container {
   display: flex;
-  flex-direction: row;
   justify-content: center;
-  align-items: center;
-}
-
-/* classrepo */
-.grid-container {
-  width: 100%;
-  margin: 20px auto;
-  display: grid;
-  grid-template-columns: repeat(8, 1fr);
-  grid-auto-rows: minmax(200px, auto);
-  gap: 10px;
-}
-
-.header {
-  grid-column: 2/8;
-}
-/* classrepo */
-#duck {
-  grid-column: 2/8;
-  grid-row: 2/4;
+  padding: 20px;
 }
 
 .img-container {
@@ -47,19 +30,23 @@ h1 {
 .img-container > img {
   width: 25%;
   height: auto;
-  border: 2px groove #fff705;
+  border: 10px groove #023f13;
 }
 /* classrepo */
 .results {
-  grid-column: 3/8;
-  grid-row: 4/5;
+  display: flex;
+  flex-direction: column;
 }
 
 .list-container {
   font-size: large;
+  padding: 10px;
 }
 ul {
   list-style-type: square;
+}
+li {
+  color: #ffffff;
 }
 
 /* https://uiverse.io/vikiWayne/slimy-horse-19 */
@@ -79,6 +66,7 @@ button {
   margin: auto;
   display: block;
   background-color: rgb(224, 76, 76);
+  display: block;
 }
 
 button:hover {

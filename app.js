@@ -72,6 +72,51 @@ function renderImgs() {
   state.allProductsArray[indexThree].views++;
 }
 
+function renderChart() {
+  let voteData = [];
+  let viewData = [];
+  let labelData = [];
+  var barColors = ["#b91d47", "#00aba9", "#2b5797", "#e8c3b9", "#1e7145"];
+
+  for (let i = 0; i < state.allProductsArray.length; i++) {
+    voteData.push(state.allProductsArray[i].votes);
+    viewData.push(state.allProductsArray[i].views);
+    labelData.push(state.allProductsArray[i].name);
+  }
+
+  const ctx = document.getElementById("myChart");
+
+  new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: labelData,
+      datasets: [
+        {
+          label: "Votes",
+          data: voteData,
+          backgroundColor: "#006400",
+          borderColor: "rgba(54, 162, 235, 1)",
+          borderWidth: 1,
+        },
+        {
+          label: "Views",
+          data: viewData,
+          backgroundColor: "#fc7300",
+          borderColor: "rgba(255, 206, 86, 1)",
+          borderWidth: 1,
+        },
+      ],
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+        },
+      },
+    },
+  });
+}
+
 function handleClick(event) {
   selections--;
 
@@ -87,6 +132,7 @@ function handleClick(event) {
 
   if (selections === 0) {
     imgContainer.removeEventListener("click", handleClick);
+    //renderChart();
   }
   console.log(selections);
 }
@@ -99,6 +145,7 @@ function handleShowResults() {
       resultsList.append(liElem);
     }
   }
+  renderChart();
 }
 
 imgContainer.addEventListener("click", handleClick);

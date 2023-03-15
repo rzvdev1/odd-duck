@@ -6,12 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/reset.css".css">
+    <script defer src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script defer src="app.js"></script>
     <title>Odd Duck</title>
   </head>
   <body>
-    <main class="grid-container">
-      <section class="header">
+    <main>
+      <section>
         <div class="flex-container">
           <img
             src="https://images.pexels.com/photos/3759364/pexels-photo-3759364.jpeg?auto=compress&cs=tinysrgb&w=800"
@@ -35,6 +36,9 @@
           <button id="results-button">View Results</button>
           <ul id="results-list"></ul>
         </div>
+      </section>
+      <section>
+        <canvas id="myChart"></canvas>
       </section>
     </main>
   </body>
