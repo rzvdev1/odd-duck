@@ -76,7 +76,6 @@ function renderChart() {
   let voteData = [];
   let viewData = [];
   let labelData = [];
-  var barColors = ["#b91d47", "#00aba9", "#2b5797", "#e8c3b9", "#1e7145"];
 
   for (let i = 0; i < state.allProductsArray.length; i++) {
     voteData.push(state.allProductsArray[i].votes);
