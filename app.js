@@ -44,20 +44,41 @@ function getRandomIndex() {
   return Math.floor(Math.random() * state.allProductsArray.length);
 }
 
-function renderImgs() {
-  let indexOne = getRandomIndex();
-  let indexTwo = getRandomIndex();
-  let indexThree = getRandomIndex();
+let prevIndices = [];
 
-  while (
-    indexOne === indexTwo ||
-    indexOne === indexThree ||
-    indexTwo === indexThree
-  ) {
-    indexOne = getRandomIndex();
-    indexTwo = getRandomIndex();
-    indexThree = getRandomIndex();
+function renderImgs() {
+  let indices = [];
+
+  while (indices.length < 3) {
+    let newIndex = getRandomIndex();
+    if (!prevIndices.includes(newIndex)) {
+      if (!indices.includes(newIndex)) {
+        indices.push(newIndex);
+      }
+    }
   }
+
+  prevIndices = indices.slice();
+
+  let indexOne = indices.pop();
+
+  let indexTwo = indices.pop();
+
+  let indexThree = indices.pop();
+
+  // let indexOne = getRandomIndex();
+  // let indexTwo = getRandomIndex();
+  // let indexThree = getRandomIndex();
+
+  // while (
+  //   indexOne === indexTwo ||
+  //   indexOne === indexThree ||
+  //   indexTwo === indexThree
+  // ) {
+  //   indexOne = getRandomIndex();
+  //   indexTwo = getRandomIndex();
+  //   indexThree = getRandomIndex();
+  // }
 
   imgOne.src = state.allProductsArray[indexOne].photo;
   imgOne.alt = state.allProductsArray[indexOne].name;
@@ -107,6 +128,19 @@ function renderChart() {
       ],
     },
     options: {
+      layout: {
+        padding: 30,
+      },
+      plugins: {
+        legend: {
+          labels: {
+            font: {
+              size: 15,
+            },
+          },
+        },
+      },
+
       scales: {
         y: {
           beginAtZero: true,
