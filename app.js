@@ -45,19 +45,22 @@ function getRandomIndex() {
 }
 
 function renderImgs() {
-  let indexOne = getRandomIndex();
-  let indexTwo = getRandomIndex();
-  let indexThree = getRandomIndex();
+  let indices = [];
 
-  while (
-    indexOne === indexTwo ||
-    indexOne === indexThree ||
-    indexTwo === indexThree
-  ) {
-    indexOne = getRandomIndex();
-    indexTwo = getRandomIndex();
-    indexThree = getRandomIndex();
+  while (indices.length < 3) {
+    let newIndex = getRandomIndex();
+
+    if (!indices.includes(newIndex)) {
+      indices.push(newIndex);
+      // }
+    }
   }
+
+  let indexOne = indices.pop();
+
+  let indexTwo = indices.pop();
+
+  let indexThree = indices.pop();
 
   imgOne.src = state.allProductsArray[indexOne].photo;
   imgOne.alt = state.allProductsArray[indexOne].name;
@@ -70,6 +73,63 @@ function renderImgs() {
   imgThree.src = state.allProductsArray[indexThree].photo;
   imgThree.alt = state.allProductsArray[indexThree].name;
   state.allProductsArray[indexThree].views++;
+}
+
+function renderChart() {
+  let voteData = [];
+  let viewData = [];
+  let labelData = [];
+
+  for (let i = 0; i < state.allProductsArray.length; i++) {
+    voteData.push(state.allProductsArray[i].votes);
+    viewData.push(state.allProductsArray[i].views);
+    labelData.push(state.allProductsArray[i].name);
+  }
+
+  const ctx = document.getElementById("myChart");
+
+  new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: labelData,
+      datasets: [
+        {
+          label: "Votes",
+          data: voteData,
+          backgroundColor: "#006400",
+          borderColor: "rgba(54, 162, 235, 1)",
+          borderWidth: 1,
+        },
+        {
+          label: "Views",
+          data: viewData,
+          backgroundColor: "#fc7300",
+          borderColor: "rgba(255, 206, 86, 1)",
+          borderWidth: 1,
+        },
+      ],
+    },
+    options: {
+      layout: {
+        padding: 30,
+      },
+      plugins: {
+        legend: {
+          labels: {
+            font: {
+              size: 15,
+            },
+          },
+        },
+      },
+
+      scales: {
+        y: {
+          beginAtZero: true,
+        },
+      },
+    },
+  });
 }
 
 function handleClick(event) {
@@ -87,6 +147,7 @@ function handleClick(event) {
 
   if (selections === 0) {
     imgContainer.removeEventListener("click", handleClick);
+    //renderChart();
   }
   console.log(selections);
 }
@@ -99,6 +160,7 @@ function handleShowResults() {
       resultsList.append(liElem);
     }
   }
+  renderChart();
 }
 
 imgContainer.addEventListener("click", handleClick);
