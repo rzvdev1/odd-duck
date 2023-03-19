@@ -20,25 +20,31 @@ function Duck(name, fileExtension = "jpg") {
   state.allProductsArray.push(this);
 }
 
-let bag = new Duck("bag");
-let banana = new Duck("banana");
-let bathrooom = new Duck("bathroom");
-let boots = new Duck("boots");
-let breakfast = new Duck("breakfast");
-let bubblegum = new Duck("bubblegum");
-let chair = new Duck("chair");
-let cthulhu = new Duck("cthulhu");
-let dogDuck = new Duck("dog-duck");
-let dragon = new Duck("dragon");
-let pen = new Duck("pen");
-let petSweep = new Duck("pet-sweep");
-let scissors = new Duck("scissors");
-let shark = new Duck("shark");
-let sweep = new Duck("sweep");
-let tauntaun = new Duck("tauntaun");
-let unicorn = new Duck("unicorn");
-let waterCan = new Duck("water-can");
-let wineGlass = new Duck("wine-glass");
+let storedProducts = localStorage.getItem("products");
+if (storedProducts) {
+  state.allProductsArray = JSON.parse(storedProducts);
+} else {
+  let bag = new Duck("bag");
+  let banana = new Duck("banana");
+  let bathrooom = new Duck("bathroom");
+  let boots = new Duck("boots");
+  let breakfast = new Duck("breakfast");
+  let bubblegum = new Duck("bubblegum");
+  let chair = new Duck("chair");
+  let cthulhu = new Duck("cthulhu");
+  let dogDuck = new Duck("dog-duck");
+  let dragon = new Duck("dragon");
+  let pen = new Duck("pen");
+  let petSweep = new Duck("pet-sweep");
+  let scissors = new Duck("scissors");
+  let shark = new Duck("shark");
+  let sweep = new Duck("sweep");
+  let tauntaun = new Duck("tauntaun");
+  let unicorn = new Duck("unicorn");
+  let waterCan = new Duck("water-can");
+  let wineGlass = new Duck("wine-glass");
+  localStorage.setItem("products", JSON.stringify(state.allProductsArray));
+}
 
 function getRandomIndex() {
   return Math.floor(Math.random() * state.allProductsArray.length);
@@ -52,7 +58,6 @@ function renderImgs() {
 
     if (!indices.includes(newIndex)) {
       indices.push(newIndex);
-      // }
     }
   }
 
@@ -73,6 +78,8 @@ function renderImgs() {
   imgThree.src = state.allProductsArray[indexThree].photo;
   imgThree.alt = state.allProductsArray[indexThree].name;
   state.allProductsArray[indexThree].views++;
+
+  localStorage.setItem("products", JSON.stringify(state.allProductsArray));
 }
 
 function renderChart() {
