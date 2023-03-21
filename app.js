@@ -50,14 +50,14 @@ function getRandomIndex() {
   return Math.floor(Math.random() * state.allProductsArray.length);
 }
 
-function renderImgs() {
-  let indices = [];
+let indices = [];
 
-  while (indices.length < 3) {
+function renderImgs() {
+  while (indices.length < 6) {
     let newIndex = getRandomIndex();
 
     if (!indices.includes(newIndex)) {
-      indices.push(newIndex);
+      indices.unshift(newIndex);
     }
   }
 
